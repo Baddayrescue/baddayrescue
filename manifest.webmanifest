@@ -1,0 +1,15 @@
+{
+  "name": "Bad Day Rescue",
+  "short_name": "Bad Day",
+  "description": "Emergency radio frequencies, shelters, hospitals and 24-hour emergency vets by FEMA region. Works with no internet.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#eef0ec",
+  "theme_color": "#f26a1b",
+  "icons": [
+    {"src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
