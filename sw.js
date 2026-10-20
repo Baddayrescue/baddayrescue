@@ -1,6 +1,6 @@
 // Bad Day Rescue offline support.
 // Bump VERSION whenever the site files change so phones pick up the update.
-const VERSION = "bdr-2026-10-12b";
+const VERSION = "bdr-2026-10-20b";
 const CORE = [
   "/",
   "/index.html",
@@ -8,14 +8,19 @@ const CORE = [
   "/testing.html",
   "/manifest.webmanifest",
   "/favicon.png",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png",
-  "/icons/maskable-512.png",
-  "/icons/apple-touch-icon.png"
+  "/icon-192.png",
+  "/icon-512.png",
+  "/maskable-512.png",
+  "/apple-touch-icon.png"
 ];
 
 self.addEventListener("install", event => {
-  event.waitUntil(caches.open(VERSION).then(cache => cache.addAll(CORE)).then(() => self.skipWaiting()));
+  // Save each file on its own, so one missing file can't stop the app from working offline.
+  event.waitUntil(
+    caches.open(VERSION)
+      .then(cache => Promise.all(CORE.map(url => cache.add(url).catch(() => null))))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener("activate", event => {
